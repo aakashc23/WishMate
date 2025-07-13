@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WishMate</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://emojiapi.dev/api/v1/package/64.png"
+    />
+
+    <!-- Custom Styles -->
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .glow-today {
+        animation: glow 2s infinite alternate;
+      }
+      @keyframes glow {
+        from {
+          box-shadow: 0 0 5px -5px #facc15;
+        }
+        to {
+          box-shadow: 0 0 20px 2px #facc15;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-black text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <header class="mb-10 text-center">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-yellow-400 mb-2"
+          data-aos="fade-down"
+        >
+          WishMate
+        </h1>
+        <p class="text-gray-400" data-aos="fade-down" data-aos-delay="100">
+          <b>Your personal wish wizard</b>
+        </p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Add Reminder Form -->
+        <div class="lg:col-span-1" data-aos="fade-right">
+          <div class="bg-gray-900 rounded-lg shadow-lg p-6 sticky top-4">
+            <h2 class="text-2xl font-semibold text-yellow-400 mb-4">
+              Add New Reminder
+            </h2>
+            <form id="reminderForm" class="space-y-4">
+              <div>
+                <label for="name" class="block text-gray-300 mb-1">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
+              </div>
+              <div>
+                <label for="date" class="block text-gray-300 mb-1">Date</label>
+                <input
+                  type="date"
+                  id="date"
+                  required
+                  class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
+              </div>
+              <div>
+                <label for="note" class="block text-gray-300 mb-1"
+                  >Note (Optional)</label
+                >
+                <textarea
+                  id="note"
+                  rows="3"
+                  class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                ></textarea>
+              </div>
+              <div>
+                <label for="category" class="block text-gray-300 mb-1"
+                  >Category</label
+                >
+                <select
+                  id="category"
+                  class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                >
+                  <option value="birthday">Birthday</option>
+                  <option value="anniversary">Anniversary</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 transform hover:scale-105"
+              >
+                Add Reminder
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Reminders List -->
+        <div class="lg:col-span-2" data-aos="fade-left">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-yellow-400">
+              Your Reminders
+            </h2>
+            <div class="flex space-x-2">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search..."
+                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              />
+              <select
+                id="categoryFilter"
+                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              >
+                <option value="all">All Categories</option>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="remindersContainer" class="space-y-4">
+            <!-- Reminders will be loaded here -->
+          </div>
+
+          <div id="noReminders" class="text-center py-10 text-gray-500 hidden">
+            <p>
+              No reminders added yet. Add your first reminder using the form!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      // Initialize AOS animations
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+    </script>
+  </body>
+</html>
